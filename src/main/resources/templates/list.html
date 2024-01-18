@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách thành phố</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 70%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        a.btn-secondary, a.btn-danger {
+            display: inline-block;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #555;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        a.btn-secondary:hover, a.btn-danger:hover {
+            background-color: #333;
+        }
+
+        a.add-city {
+            display: block;
+            margin-top: 20px;
+            text-decoration: none;
+            padding: 10px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        a.add-city:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<center>
+    <h1 style="text-align: center">Danh sách thành phố</h1>
+    <a th:href="@{/city/create}" class="add-city" style="text-align: center">Thêm thành phố</a>
+    <div th:if="${message}" class="success-message">
+        <p th:text="${message}"></p>
+    </div>
+<div th:each="city : ${cities}">
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Thành phố</th>
+            <th>Quốc gia</th>
+            <th>Function</th>
+        </tr>
+        <tr>
+            <td th:text="${city.id}"></td>
+            <td>
+                <a th:href="@{/city/detail/__${city.id}__}" th:text="${city.name}"></a>
+            </td>
+            <td th:text="${city.country.name}"></td>
+<!--            <td>VN</td>-->
+            <td>
+                <a th:href="@{/city/edit/__${city.id}__}" class="btn-secondary">Chỉnh sửa</a>
+                <a th:href="@{/city/delete/__${city.id}__}" class="btn-danger" >Xóa</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</center>
+</body>
+</html>

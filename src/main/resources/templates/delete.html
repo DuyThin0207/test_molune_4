@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Xóa thành phố</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        center {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>Xóa thành phố</h1>
+    <h4 style="color: red">Bạn có chắc muốn xóa thành phố?</h4>
+    <a href="/city/list">Xem danh sách thành phố</a>
+    <form action="/city/delete" method="post">
+        <table border="1" cellpadding="10" th:object="${city}">
+            <tr>
+                <input type="hidden" th:field="*{id}">
+<!--                <input type="hidden" th:field="*{country.id}">-->
+                <td>Tên</td>
+                <td>
+                    <input type="text" readonly="readonly" th:field="*{name}">
+                </td>
+            </tr>
+<!--            <tr>-->
+<!--                <td>Quốc gia</td>-->
+<!--                <td>-->
+<!--                    <input type="text" readonly="readonly" th:field="*{country.name}">-->
+<!--                </td>-->
+<!--            </tr>-->
+            <tr>
+                <td>Diện tích</td>
+                <td>
+                    <input type="number" readonly="readonly" th:field="*{acreage}">
+                </td>
+            </tr>
+            <tr>
+                <td>Dân số</td>
+                <td>
+                    <input type="number" readonly="readonly" th:field="*{population}">
+                </td>
+            </tr>
+            <tr>
+                <td>GDP</td>
+                <td>
+                    <input type="number" readonly="readonly" th:field="*{gdp}">
+                </td>
+            </tr>
+            <tr>
+                <td>Giới thiệu</td>
+                <td>
+                    <textarea readonly="readonly" th:field="*{description}"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Xóa thành phố" th:data-confirm-delete="|Are you oke ???|"
+                           onclick="if (!(confirm(this.getAttribute('data-confirm-delete')))) return false">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <a href="/city/list">Thoát</a>
+</center>
+</body>
+</html>

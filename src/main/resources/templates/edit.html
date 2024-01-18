@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa thành phố</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        center {
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>Chi tiết thành phố</h1>
+    <a href="/city/list">Xem danh sách thành phố</a>
+    <form action="/city/edit" method="post">
+        <table border="1" cellpadding="10" th:object="${city}">
+            <tr>
+                <input type="hidden" th:field="*{id}">
+                <td>Tên</td>
+                <td>
+                    <input type="text" th:field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <td>Quốc gia</td>
+                <td>
+                    <label>
+                        <select th:field="*{country}">
+                            <option th:each="country : ${countries}"
+                                    th:value="${country.id}"
+                                    th:text="${country.name}"></option>
+                        </select>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Diện tích</td>
+                <td>
+                    <input type="number" th:field="*{acreage}">
+                </td>
+            </tr>
+            <tr>
+                <td>Dân số</td>
+                <td>
+                    <input type="number" th:field="*{population}">
+                </td>
+            </tr>
+            <tr>
+                <td>GDP</td>
+                <td>
+                    <input type="number" th:field="*{gdp}">
+                </td>
+            </tr>
+            <tr>
+                <td>Giới thiệu</td>
+                <td>
+                    <textarea th:field="*{description}"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Chỉnh sửa thành phố">
+                </td>
+            </tr>
+        </table>
+    </form>
+    <a href="/city/list">Thoát</a>
+</center>
+</body>
+</html>
